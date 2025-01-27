@@ -7,14 +7,34 @@ const INVENTORY_ITEMS = {
     "Mais Alk.Frei",
     "Holsten",
     "Burgunder QbA",
-    "Proseco"
+    "Prosecco",
+    "Rose",
+    "Riesling",
+    "Burgunder Neu",
+    "Chardonnay",
+    "0.25 Classic",
+    "0.25 Mittel",
+    "0.25 Still",
+    "0.75 Classic",
+    "0.75 Mittel",
+    "0.75 Still",
+    "Schweppes Ginger Ale",
+    "Schweppes Pink",
+    "Maracuja Saft",
+    "Mango Saft",
+    "Apfel Saft",
+    "O-Saft",
+    "Kirsche Saft",
+    "Aperol",
+    "Lillet",
   ],
   tea: [
     "Earl Grey",
-    "Green Tea",
-    "Chamomile",
-    "English Breakfast",
-    "Peppermint"
+    "Darjeeling",
+    "Grüner Tee",
+    "Pfefferminze",
+    "Orancuja",
+    "Masala",
   ],
   sirup: [
     "Vanilla",
@@ -65,12 +85,13 @@ function InventoryManager({ category }) {
   };
 
   const resetAmounts = () => {
-    if (window.confirm(`Are you sure you want to reset all ${category} amounts to zero?`)) {
+    if (window.confirm(`Are you sure you want to reset all ${category} amounts and notes to zero?`)) {
       const resetInventory = Object.keys(inventory).reduce((acc, item) => ({
         ...acc,
         [item]: ''
       }), {});
       setInventory(resetInventory);
+      setComment(''); // Add this line to clear the comment
     }
   };
 
@@ -95,6 +116,15 @@ function InventoryManager({ category }) {
     }
   };
 
+  const [comment, setComment] = useState(() => {
+    return localStorage.getItem(`comment_${category}`) || '';
+  });
+  
+  // Add this effect to save comments
+  useEffect(() => {
+    localStorage.setItem(`comment_${category}`, comment);
+  }, [comment, category]);
+  
   return (
     <div className="inventory-manager">
       <div className="inventory-content">
@@ -128,6 +158,15 @@ function InventoryManager({ category }) {
             </tbody>
           </table>
         </div>
+        
+      <div className="comment-box">
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Add your notes here..."
+          rows="4"
+        />
+      </div>
 
         <div className="save-load">
           <button className="danger-button" onClick={resetAmounts}>
