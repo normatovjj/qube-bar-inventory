@@ -87,7 +87,7 @@
 }
 
 .save-load {
-  margin-top: 32px; /* Add some space between list and buttons */
+  margin-top: 12px; /* Add some space between list and buttons */
   padding: 12px;
   background: white;
   display: flex;

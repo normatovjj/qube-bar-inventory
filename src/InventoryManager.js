@@ -97,7 +97,7 @@ function InventoryManager() {
 
         <div className="save-load">
           <button className="danger-button" onClick={resetAmounts}>
-            Reset All Amounts
+            Reset All
           </button>
           <button onClick={() => {
             localStorage.setItem('officeInventory', JSON.stringify(inventory));
