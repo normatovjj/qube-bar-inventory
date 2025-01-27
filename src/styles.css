@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 12px 8px;  /* Simplified padding */
   background: white;
 }
 
@@ -21,6 +21,7 @@
   color: #1d1d1f;
   margin: 0;
   letter-spacing: -0.5px;
+  padding-left: 8px;  /* This will align with list items */
 }
 
 .menu-button {
@@ -137,16 +138,7 @@
 
 .inventory-manager {
   background-color: white;
-  padding: 16px 8px;
-}
-
-.app h1 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #1d1d1f;
-  margin: 16px 0;
-  padding: 0 16px;
-  letter-spacing: -0.5px;
+  padding: 0 8px;  /* Remove top/bottom padding to reduce space */
 }
 
 .inventory-content {
