@@ -89,23 +89,24 @@
 
 .menu-card {
   position: absolute;
-  top: 70px;
+  top: 16px;          /* Align with header padding */
   right: 16px;
   background: white;
   border-radius: 14px;
   padding: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  transform: translateY(-20px);
+  transform-origin: top right;
+  transform: scale(0.95);
   opacity: 0;
   transition: all 0.3s ease;
   width: 160px;
-  pointer-events: none; /* Disable interactions when closed */
+  pointer-events: none;
 }
 
 .menu-overlay.open .menu-card {
-  transform: translateY(0);
+  transform: scale(1);
   opacity: 1;
-  pointer-events: auto; /* Enable interactions when open */
+  pointer-events: auto;
 }
 
 .menu-card button {
