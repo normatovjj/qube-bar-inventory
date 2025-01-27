@@ -1,27 +1,22 @@
 .app {
-  padding: 16px;
-  max-width: 100%;
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: #f5f5f7;
   min-height: 100vh;
+  -webkit-text-size-adjust: 100%; /* Prevent iOS font scaling */
 }
 
 .inventory-manager {
   background-color: white;
-  padding: 32px;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  max-width: 900px;
-  margin: 0 auto;
+  padding: 16px 8px;
 }
 
 h2 {
-  font-size: 44px;
+  font-size: 24px;
   font-weight: 700;
   color: #1d1d1f;
-  margin: 0 0 40px 0;
-  letter-spacing: -0.5px;
+  margin: 0 0 20px 0;
   text-align: center;
 }
 
@@ -33,74 +28,56 @@ h2 {
 
 .table-container {
   background-color: white;
-  border-radius: 16px;
-  border: 1px solid #e5e5ea;
-  overflow: hidden;
 }
 
 .inventory-list {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
 }
 
 .inventory-list th {
-  background-color: #f5f5f7;
-  padding: 24px;
-  text-align: left;
-  font-weight: 600;
-  color: #1d1d1f;
-  font-size: 20px;
-  border-bottom: 1px solid #e5e5ea;
-  letter-spacing: -0.2px;
-}
-
-.inventory-list th:last-child {
-  width: 100px;
-  text-align: center;
+  display: none; /* Hide headers on mobile */
 }
 
 .inventory-list td {
-  padding: 24px;
+  padding: 12px 8px;
   border-bottom: 1px solid #e5e5ea;
-  font-size: 24px;
-  color: #1d1d1f;
+  vertical-align: middle;
+}
+
+/* Make item text much bigger */
+.inventory-list td:first-child {
+  font-size: 22px;
   font-weight: 500;
-  letter-spacing: -0.3px;
+  padding-right: 8px;
+  line-height: 1.2;
+  width: calc(100% - 40px); /* Give most space to text */
 }
 
+/* Make number cell tiny */
 .inventory-list td:last-child {
-  text-align: center;
-  padding: 16px;
+  width: 40px;
+  padding-left: 0;
+  padding-right: 8px;
 }
 
-.inventory-list tr:last-child td {
-  border-bottom: none;
-}
-
-.inventory-list tr:hover {
-  background-color: #f9f9fb;
-}
-
+/* Make the number input tiny */
 .inventory-list input[type="tel"] {
   width: 32px;
-  height: 44px;
+  height: 32px;
   padding: 0;
-  font-size: 24px;
-  border-radius: 8px;
-  border: 2px solid #d2d2d7;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1.5px solid #d2d2d7;
   background-color: #ffffff;
   -webkit-appearance: none;
-  transition: all 0.2s ease;
   text-align: center;
-  font-weight: 600;
-  color: #1d1d1f;
+  font-weight: 500;
 }
 
 .inventory-list input[type="tel"]:focus {
   outline: none;
   border-color: #0071e3;
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
 }
 
 .inventory-list input[type="tel"]::placeholder {
@@ -109,77 +86,43 @@ h2 {
 }
 
 .save-load {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
   display: flex;
-  gap: 16px;
-  padding: 0 16px;
+  gap: 8px;
 }
 
 .save-load button {
   flex: 1;
-  height: 56px;
-  padding: 0 30px;
-  font-size: 20px;
+  height: 44px;
+  font-size: 16px;
   font-weight: 600;
-  border-radius: 14px;
+  border-radius: 10px;
   border: none;
-  background: linear-gradient(135deg, #42424a, #1d1d1f);
+  background: #1d1d1f;
   color: white;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  letter-spacing: -0.2px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .save-load button:first-child {
-  background: linear-gradient(135deg, #ea4335, #d62516);
+  background: #ff3b30;
 }
 
-.save-load button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
-.save-load button:active {
-  transform: translateY(0);
-  opacity: 0.9;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-@media (max-width: 768px) {
+/* Prevent any zoom */
+@media screen and (max-width: 768px) {
+  * {
+    touch-action: manipulation;
+  }
+  
+  input[type="tel"] {
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
+  
   .inventory-manager {
-    padding: 16px;
-    margin: 0;
-    border-radius: 0;
-  }
-  
-  h2 {
-    font-size: 32px;
-    margin-bottom: 24px;
-  }
-
-  .inventory-list th {
-    font-size: 18px;
-    padding: 16px;
-  }
-
-  .inventory-list td {
-    font-size: 20px;
-    padding: 16px;
-  }
-  
-  .inventory-list input[type="tel"] {
-    width: 50px;
-    height: 40px;
-    font-size: 20px;
-  }
-  
-  .save-load {
-    flex-direction: column;
-    padding: 0;
-  }
-  
-  .save-load button {
-    font-size: 18px;
-    height: 50px;
+    padding-bottom: 80px; /* Space for fixed buttons */
   }
 }
