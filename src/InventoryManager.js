@@ -1,35 +1,59 @@
 import React, { useState, useEffect } from 'react';
 
-function InventoryManager() {
-  const fixedItems = [
-    "Mais Dunkel",
-    "Mais Alk.Frei",
-    "Holsten",
-    "Burgunder QbA",
-    "Proseco",
-    "Sticky Notes (packs)",
-    "Paper Clips (boxes)",
-    "Folders (units)",
-    "Binders (units)",
-    "Printer Ink (cartridges)"
-  ];
+function InventoryManager({ category }) {
+  const inventoryItems = {
+    drinks: [
+      "Mais Dunkel",
+      "Mais Alk.Frei",
+      "Holsten",
+      "Burgunder QbA",
+      "Proseco"
+    ],
+    tea: [
+      "Earl Grey",
+      "Green Tea",
+      "Chamomile",
+      "English Breakfast",
+      "Peppermint"
+    ],
+    sirup: [
+      "Vanilla",
+      "Caramel",
+      "Hazelnut",
+      "Chocolate",
+      "Coconut"
+    ]
+  };
 
   // Initialize state with localStorage data or empty strings for fixed items
   const [inventory, setInventory] = useState(() => {
-    const savedInventory = localStorage.getItem('officeInventory');
+    const savedInventory = localStorage.getItem(`inventory_${category}`);
     if (savedInventory) {
       return JSON.parse(savedInventory);
     }
-    return fixedItems.reduce((acc, item) => ({
+    return inventoryItems[category].reduce((acc, item) => ({
       ...acc,
       [item]: ''
     }), {});
   });
 
+  // Update inventory when category changes
+  useEffect(() => {
+    const savedInventory = localStorage.getItem(`inventory_${category}`);
+    if (savedInventory) {
+      setInventory(JSON.parse(savedInventory));
+    } else {
+      setInventory(inventoryItems[category].reduce((acc, item) => ({
+        ...acc,
+        [item]: ''
+      }), {}));
+    }
+  }, [category]);
+
   // Save to localStorage whenever inventory changes
   useEffect(() => {
-    localStorage.setItem('officeInventory', JSON.stringify(inventory));
-  }, [inventory]);
+    localStorage.setItem(`inventory_${category}`, JSON.stringify(inventory));
+  }, [inventory, category]);
 
   const updateAmount = (item, value) => {
     const cleanValue = value.replace(/^0+/, '');
@@ -40,7 +64,7 @@ function InventoryManager() {
   };
 
   const resetAmounts = () => {
-    if (window.confirm('Are you sure you want to reset all amounts to zero?')) {
+    if (window.confirm(`Are you sure you want to reset all ${category} amounts to zero?`)) {
       const resetInventory = Object.keys(inventory).reduce((acc, item) => ({
         ...acc,
         [item]: ''
@@ -54,7 +78,16 @@ function InventoryManager() {
       event.preventDefault();
       const nextInput = document.querySelector(`input[data-index="${currentIndex + 1}"]`);
       if (nextInput) {
-        nextInput.focus();
+        // For mobile devices, we need to focus and select in two steps
+        setTimeout(() => {
+          nextInput.focus();
+          // Small delay to ensure focus has happened
+          setTimeout(() => {
+            nextInput.select();
+            // Fallback for iOS
+            nextInput.setSelectionRange(0, nextInput.value.length);
+          }, 10);
+        }, 0);
       } else {
         event.target.blur();
       }
@@ -69,11 +102,11 @@ function InventoryManager() {
             <thead>
               <tr>
                 <th>Item</th>
-                <th>Amount in Stock</th>
+                <th>Amount</th>
               </tr>
             </thead>
             <tbody>
-              {fixedItems.map((item, index) => (
+              {inventoryItems[category].map((item, index) => (
                 <tr key={index}>
                   <td>{item}</td>
                   <td>
@@ -82,7 +115,7 @@ function InventoryManager() {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       maxLength="2"
-                      value={inventory[item]}
+                      value={inventory[item] || ''}
                       onChange={(e) => updateAmount(item, e.target.value)}
                       onKeyPress={(e) => handleKeyPress(e, index)}
                       data-index={index}
@@ -97,10 +130,10 @@ function InventoryManager() {
 
         <div className="save-load">
           <button className="danger-button" onClick={resetAmounts}>
-            Reset All
+            Reset {category}
           </button>
           <button onClick={() => {
-            localStorage.setItem('officeInventory', JSON.stringify(inventory));
+            localStorage.setItem(`inventory_${category}`, JSON.stringify(inventory));
             alert('Inventory saved successfully');
           }}>
             Save
