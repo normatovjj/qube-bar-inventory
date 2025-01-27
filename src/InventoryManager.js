@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 function InventoryManager() {
   const fixedItems = [
-    "Paper (reams)",
-    "Pens (boxes)",
-    "Staplers (units)",
-    "Notebooks (units)",
-    "Markers (packs)",
+    "Mais Dunkel",
+    "Mais Alk.Frei",
+    "Holsten",
+    "Burgunder QbA",
+    "Proseco",
     "Sticky Notes (packs)",
     "Paper Clips (boxes)",
     "Folders (units)",
@@ -22,7 +22,7 @@ function InventoryManager() {
     }
     return fixedItems.reduce((acc, item) => ({
       ...acc,
-      [item]: ''  // Initialize with empty string instead of 0
+      [item]: ''
     }), {});
   });
 
@@ -31,37 +31,31 @@ function InventoryManager() {
     localStorage.setItem('officeInventory', JSON.stringify(inventory));
   }, [inventory]);
 
-  // Update amount for an item
   const updateAmount = (item, value) => {
-    // Remove leading zeros
     const cleanValue = value.replace(/^0+/, '');
-    
     setInventory({
       ...inventory,
       [item]: cleanValue
     });
   };
 
-  // Reset all amounts to empty
   const resetAmounts = () => {
-    const resetInventory = Object.keys(inventory).reduce((acc, item) => ({
-      ...acc,
-      [item]: ''  // Reset to empty string instead of 0
-    }), {});
-    setInventory(resetInventory);
+    if (window.confirm('Are you sure you want to reset all amounts to zero?')) {
+      const resetInventory = Object.keys(inventory).reduce((acc, item) => ({
+        ...acc,
+        [item]: ''
+      }), {});
+      setInventory(resetInventory);
+    }
   };
 
-  // Handle enter key press
   const handleKeyPress = (event, currentIndex) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      
-      // Find the next input element
       const nextInput = document.querySelector(`input[data-index="${currentIndex + 1}"]`);
       if (nextInput) {
         nextInput.focus();
       } else {
-        // If we're at the last input, blur the current input to hide keyboard on mobile
         event.target.blur();
       }
     }
@@ -69,8 +63,6 @@ function InventoryManager() {
 
   return (
     <div className="inventory-manager">
-      <h2>Office Supply Inventory</h2>
-      
       <div className="inventory-content">
         <div className="table-container">
           <table className="inventory-list">
@@ -104,7 +96,7 @@ function InventoryManager() {
         </div>
 
         <div className="save-load">
-          <button onClick={resetAmounts}>
+          <button className="danger-button" onClick={resetAmounts}>
             Reset All Amounts
           </button>
           <button onClick={() => {
