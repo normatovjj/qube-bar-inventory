@@ -25,63 +25,63 @@ function InventoryManager() {
     <div className="inventory-manager">
       <h2>Manage Inventory</h2>
       
-      {/* Add Item Form */}
       <div className="add-item-form">
         <input
           type="text"
-          placeholder="Enter item name"
+          placeholder="Item name"
           value={newItemName}
           onChange={(e) => setNewItemName(e.target.value)}
         />
         <input
           type="number"
-          placeholder="Enter amount"
+          placeholder="Amount"
           value={newItemAmount || ''}
           onChange={(e) => setNewItemAmount(e.target.value)}
         />
-        <button onClick={addItem}>Add Item</button>
+        <button onClick={addItem}>Add</button>
       </div>
 
-      {/* Inventory List */}
-      <table className="inventory-list">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Quantity</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>
-                <input
-                  type="number"
-                  value={item.amount}
-                  onChange={(e) => setItems(items.map(i => i.id === item.id ? {...i, 
-amount: parseInt(e.target.value)} : i))}
-                />
-              </td>
-              <td>
-                <button onClick={() => removeItem(item.id)}>Remove</button>
-              </td>
+      <div style={{ overflowX: 'auto' }}>
+        <table className="inventory-list">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>
+                  <input
+                    type="number"
+                    value={item.amount}
+                    onChange={(e) => setItems(items.map(i => 
+                      i.id === item.id ? {...i, amount: parseInt(e.target.value) || 0} : i
+                    ))}
+                  />
+                </td>
+                <td>
+                  <button onClick={() => removeItem(item.id)}>Remove</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Save/Load Functionality (Optional for now) */}
       <div className="save-load">
         <button onClick={() => {
           localStorage.setItem('inventory', JSON.stringify(items));
-          alert('Inventory saved to local storage!');
-        }}>Save Inventory</button>
+          alert('Saved!');
+        }}>Save</button>
         <button onClick={() => {
           const savedItems = JSON.parse(localStorage.getItem('inventory')) || [];
           setItems(savedItems);
-          alert('Inventory loaded from local storage!');
-        }}>Load Inventory</button>
+          alert('Loaded!');
+        }}>Load</button>
       </div>
     </div>
   );
