@@ -1,0 +1,101 @@
+import React, { useState, useEffect } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { RotateCcw } from 'lucide-react';
+
+const BarInventory = () => {
+  const fixedItems = [
+    "Vodka (750ml bottles)",
+    "Gin (750ml bottles)",
+    "Rum (750ml bottles)",
+    "Tequila (750ml bottles)",
+    "Triple Sec (750ml bottles)",
+    "Simple Syrup (liters)",
+    "Lime Juice (liters)",
+    "Cola (2L bottles)",
+    "Tonic Water (1L bottles)",
+    "Cranberry Juice (1L bottles)"
+  ];
+
+  // Initialize state with localStorage data or zeros for fixed items
+  const [inventory, setInventory] = useState(() => {
+    const savedInventory = localStorage.getItem('barInventory');
+    if (savedInventory) {
+      return JSON.parse(savedInventory);
+    }
+    return fixedItems.reduce((acc, item) => ({
+      ...acc,
+      [item]: 0
+    }), {});
+  });
+
+  // Save to localStorage whenever inventory changes
+  useEffect(() => {
+    localStorage.setItem('barInventory', JSON.stringify(inventory));
+  }, [inventory]);
+
+  // Update amount for an item
+  const updateAmount = (item, amount) => {
+    setInventory({
+      ...inventory,
+      [item]: parseInt(amount) || 0
+    });
+  };
+
+  // Reset all amounts to 0
+  const resetAmounts = () => {
+    const resetInventory = Object.keys(inventory).reduce((acc, item) => ({
+      ...acc,
+      [item]: 0
+    }), {});
+    setInventory(resetInventory);
+  };
+
+  return (
+    <Card className="w-full max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle>Bar Inventory Tracker</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="overflow-hidden rounded-lg border">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-slate-50">
+                <th className="text-left p-4 font-medium">Item</th>
+                <th className="text-right p-4 font-medium w-32">Amount Used</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fixedItems.map((item, index) => (
+                <tr key={index} className="border-t">
+                  <td className="p-4">{item}</td>
+                  <td className="p-4">
+                    <Input
+                      type="number"
+                      value={inventory[item]}
+                      onChange={(e) => updateAmount(item, e.target.value)}
+                      className="w-full text-right"
+                      min="0"
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <Button
+          variant="outline"
+          onClick={resetAmounts}
+          className="mt-6"
+        >
+          <RotateCcw className="w-4 h-4 mr-2" />
+          Reset All Amounts
+        </Button>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default BarInventory;

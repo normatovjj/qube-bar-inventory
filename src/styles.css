@@ -3,83 +3,57 @@
   max-width: 100%;
   margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f5f5f7;
+  min-height: 100vh;
 }
 
 .inventory-manager {
-  background-color: #ffffff;
-  padding: 16px;
+  background-color: white;
+  padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 h2 {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 20px;
   color: #1c1c1e;
+  margin: 0 0 24px 0;
 }
 
-.add-item-form {
+.inventory-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 24px;
 }
 
-.add-item-form input {
-  height: 44px;
-  padding: 0 16px;
-  font-size: 17px;
-  border-radius: 10px;
+.table-container {
+  background-color: white;
+  border-radius: 12px;
   border: 1px solid #e5e5ea;
-  background-color: #f2f2f7;
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.add-item-form input:focus {
-  background-color: #ffffff;
-  border-color: #007aff;
-  outline: none;
-}
-
-.add-item-form button {
-  height: 44px;
-  font-size: 17px;
-  font-weight: 600;
-  border-radius: 10px;
-  background-color: #007aff;
-  color: white;
-  border: none;
-  padding: 0 20px;
-  transition: background-color 0.2s;
-}
-
-.add-item-form button:active {
-  background-color: #0051a8;
+  overflow: hidden;
 }
 
 .inventory-list {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  margin-top: 20px;
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
 }
 
 .inventory-list th {
-  padding: 12px 16px;
-  text-align: left;
   background-color: #f2f2f7;
+  padding: 16px;
+  text-align: left;
   font-weight: 600;
   color: #3a3a3c;
   font-size: 15px;
+  border-bottom: 1px solid #e5e5ea;
 }
 
 .inventory-list td {
-  padding: 12px 16px;
+  padding: 16px;
   border-bottom: 1px solid #e5e5ea;
   font-size: 17px;
 }
@@ -89,7 +63,7 @@ h2 {
 }
 
 .inventory-list input[type="number"] {
-  width: 80px;
+  width: 100px;
   height: 36px;
   padding: 0 12px;
   font-size: 17px;
@@ -99,22 +73,20 @@ h2 {
   -webkit-appearance: none;
 }
 
-.inventory-list button {
-  padding: 8px 16px;
-  font-size: 15px;
-  font-weight: 600;
-  background-color: #ff3b30;
-  color: white;
-  border: none;
-  border-radius: 8px;
+.inventory-list input[type="number"]:focus {
+  outline: none;
+  border-color: #007aff;
+  background-color: white;
 }
 
-.inventory-list button:active {
-  background-color: #d70015;
+/* Remove number input spinners */
+.inventory-list input[type="number"]::-webkit-inner-spin-button,
+.inventory-list input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .save-load {
-  margin-top: 24px;
   display: flex;
   gap: 12px;
 }
@@ -122,37 +94,37 @@ h2 {
 .save-load button {
   flex: 1;
   height: 44px;
+  padding: 0 20px;
   font-size: 17px;
   font-weight: 600;
   border-radius: 10px;
   border: none;
-  background-color: #34c759;
+  background-color: #007aff;
   color: white;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+}
+
+.save-load button:first-child {
+  background-color: #ff3b30;
 }
 
 .save-load button:active {
-  background-color: #248a3d;
+  transform: scale(0.98);
+  opacity: 0.9;
 }
 
-/* Disable arrows on number inputs */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-@media (min-width: 768px) {
-  .app {
-    padding: 24px;
-    max-width: 800px;
+@media (max-width: 768px) {
+  .inventory-manager {
+    padding: 16px;
+    margin: 0;
+    border-radius: 0;
   }
-
-  .add-item-form {
-    flex-direction: row;
+  
+  .save-load {
+    flex-direction: column;
   }
-
-  .add-item-form input {
-    flex: 1;
+  
+  .inventory-list input[type="number"] {
+    width: 80px;
   }
 }
