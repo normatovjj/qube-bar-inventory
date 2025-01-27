@@ -1,37 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+
+// Move inventoryItems outside the component
+const INVENTORY_ITEMS = {
+  drinks: [
+    "Mais Dunkel",
+    "Mais Alk.Frei",
+    "Holsten",
+    "Burgunder QbA",
+    "Proseco"
+  ],
+  tea: [
+    "Earl Grey",
+    "Green Tea",
+    "Chamomile",
+    "English Breakfast",
+    "Peppermint"
+  ],
+  sirup: [
+    "Vanilla",
+    "Caramel",
+    "Hazelnut",
+    "Chocolate",
+    "Coconut"
+  ]
+};
 
 function InventoryManager({ category }) {
-  const inventoryItems = {
-    drinks: [
-      "Mais Dunkel",
-      "Mais Alk.Frei",
-      "Holsten",
-      "Burgunder QbA",
-      "Proseco"
-    ],
-    tea: [
-      "Earl Grey",
-      "Green Tea",
-      "Chamomile",
-      "English Breakfast",
-      "Peppermint"
-    ],
-    sirup: [
-      "Vanilla",
-      "Caramel",
-      "Hazelnut",
-      "Chocolate",
-      "Coconut"
-    ]
-  };
-
   // Initialize state with localStorage data or empty strings for fixed items
   const [inventory, setInventory] = useState(() => {
     const savedInventory = localStorage.getItem(`inventory_${category}`);
     if (savedInventory) {
       return JSON.parse(savedInventory);
     }
-    return inventoryItems[category].reduce((acc, item) => ({
+    return INVENTORY_ITEMS[category].reduce((acc, item) => ({
       ...acc,
       [item]: ''
     }), {});
@@ -43,7 +44,7 @@ function InventoryManager({ category }) {
     if (savedInventory) {
       setInventory(JSON.parse(savedInventory));
     } else {
-      setInventory(inventoryItems[category].reduce((acc, item) => ({
+      setInventory(INVENTORY_ITEMS[category].reduce((acc, item) => ({
         ...acc,
         [item]: ''
       }), {}));
@@ -106,7 +107,7 @@ function InventoryManager({ category }) {
               </tr>
             </thead>
             <tbody>
-              {inventoryItems[category].map((item, index) => (
+              {INVENTORY_ITEMS[category].map((item, index) => (
                 <tr key={index}>
                   <td>{item}</td>
                   <td>
