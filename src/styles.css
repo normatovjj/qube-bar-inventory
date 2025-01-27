@@ -17,11 +17,12 @@
 }
 
 h2 {
-  font-size: 40px;
-  font-weight: 600;
+  font-size: 44px;
+  font-weight: 700;
   color: #1d1d1f;
-  margin: 0 0 32px 0;
+  margin: 0 0 40px 0;
   letter-spacing: -0.5px;
+  text-align: center;
 }
 
 .inventory-content {
@@ -45,79 +46,97 @@ h2 {
 
 .inventory-list th {
   background-color: #f5f5f7;
-  padding: 20px;
+  padding: 24px;
   text-align: left;
   font-weight: 600;
   color: #1d1d1f;
-  font-size: 18px;
+  font-size: 20px;
   border-bottom: 1px solid #e5e5ea;
   letter-spacing: -0.2px;
 }
 
+.inventory-list th:last-child {
+  width: 100px;
+  text-align: center;
+}
+
 .inventory-list td {
-  padding: 20px;
+  padding: 24px;
   border-bottom: 1px solid #e5e5ea;
-  font-size: 20px;
+  font-size: 24px;
   color: #1d1d1f;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+
+.inventory-list td:last-child {
+  text-align: center;
+  padding: 16px;
 }
 
 .inventory-list tr:last-child td {
   border-bottom: none;
 }
 
-.inventory-list input[type="number"] {
-  width: 120px;
+.inventory-list tr:hover {
+  background-color: #f9f9fb;
+}
+
+.inventory-list input[type="tel"] {
+  width: 32px;
   height: 44px;
-  padding: 0 16px;
-  font-size: 20px;
-  border-radius: 12px;
-  border: 1px solid #d2d2d7;
+  padding: 0;
+  font-size: 24px;
+  border-radius: 8px;
+  border: 2px solid #d2d2d7;
   background-color: #ffffff;
   -webkit-appearance: none;
   transition: all 0.2s ease;
+  text-align: center;
+  font-weight: 600;
+  color: #1d1d1f;
 }
 
-.inventory-list input[type="number"]:focus {
+.inventory-list input[type="tel"]:focus {
   outline: none;
   border-color: #0071e3;
   box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
 }
 
-/* Remove number input spinners */
-.inventory-list input[type="number"]::-webkit-inner-spin-button,
-.inventory-list input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.inventory-list input[type="tel"]::placeholder {
+  color: #86868b;
+  opacity: 0.5;
 }
 
 .save-load {
   display: flex;
   gap: 16px;
+  padding: 0 16px;
 }
 
 .save-load button {
   flex: 1;
-  height: 50px;
+  height: 56px;
   padding: 0 30px;
-  font-size: 19px;
-  font-weight: 500;
-  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 14px;
   border: none;
-  background: linear-gradient(to bottom, #42424a, #1d1d1f);
+  background: linear-gradient(135deg, #42424a, #1d1d1f);
   color: white;
   transition: all 0.3s ease;
   cursor: pointer;
   letter-spacing: -0.2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .save-load button:first-child {
-  background: linear-gradient(to bottom, #ea4335, #d62516);
+  background: linear-gradient(135deg, #ea4335, #d62516);
 }
 
 .save-load button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .save-load button:active {
@@ -128,7 +147,7 @@ h2 {
 
 @media (max-width: 768px) {
   .inventory-manager {
-    padding: 20px;
+    padding: 16px;
     margin: 0;
     border-radius: 0;
   }
@@ -139,27 +158,28 @@ h2 {
   }
 
   .inventory-list th {
-    font-size: 16px;
+    font-size: 18px;
     padding: 16px;
   }
 
   .inventory-list td {
-    font-size: 18px;
+    font-size: 20px;
     padding: 16px;
+  }
+  
+  .inventory-list input[type="tel"] {
+    width: 50px;
+    height: 40px;
+    font-size: 20px;
   }
   
   .save-load {
     flex-direction: column;
+    padding: 0;
   }
   
   .save-load button {
     font-size: 18px;
-    height: 48px;
-  }
-  
-  .inventory-list input[type="number"] {
-    width: 100px;
-    height: 40px;
-    font-size: 18px;
+    height: 50px;
   }
 }

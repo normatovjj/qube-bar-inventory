@@ -14,7 +14,7 @@ function InventoryManager() {
     "Printer Ink (cartridges)"
   ];
 
-  // Initialize state with localStorage data or zeros for fixed items
+  // Initialize state with localStorage data or empty strings for fixed items
   const [inventory, setInventory] = useState(() => {
     const savedInventory = localStorage.getItem('officeInventory');
     if (savedInventory) {
@@ -22,7 +22,7 @@ function InventoryManager() {
     }
     return fixedItems.reduce((acc, item) => ({
       ...acc,
-      [item]: 0
+      [item]: ''  // Initialize with empty string instead of 0
     }), {});
   });
 
@@ -32,20 +32,39 @@ function InventoryManager() {
   }, [inventory]);
 
   // Update amount for an item
-  const updateAmount = (item, amount) => {
+  const updateAmount = (item, value) => {
+    // Remove leading zeros
+    const cleanValue = value.replace(/^0+/, '');
+    
     setInventory({
       ...inventory,
-      [item]: parseInt(amount) || 0
+      [item]: cleanValue
     });
   };
 
-  // Reset all amounts to 0
+  // Reset all amounts to empty
   const resetAmounts = () => {
     const resetInventory = Object.keys(inventory).reduce((acc, item) => ({
       ...acc,
-      [item]: 0
+      [item]: ''  // Reset to empty string instead of 0
     }), {});
     setInventory(resetInventory);
+  };
+
+  // Handle enter key press
+  const handleKeyPress = (event, currentIndex) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      
+      // Find the next input element
+      const nextInput = document.querySelector(`input[data-index="${currentIndex + 1}"]`);
+      if (nextInput) {
+        nextInput.focus();
+      } else {
+        // If we're at the last input, blur the current input to hide keyboard on mobile
+        event.target.blur();
+      }
+    }
   };
 
   return (
@@ -67,10 +86,15 @@ function InventoryManager() {
                   <td>{item}</td>
                   <td>
                     <input
-                      type="number"
+                      type="tel"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      maxLength="2"
                       value={inventory[item]}
                       onChange={(e) => updateAmount(item, e.target.value)}
-                      min="0"
+                      onKeyPress={(e) => handleKeyPress(e, index)}
+                      data-index={index}
+                      placeholder="0"
                     />
                   </td>
                 </tr>
