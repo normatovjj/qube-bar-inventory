@@ -23,7 +23,7 @@ function InventoryManager() {
 
   return (
     <div className="inventory-manager">
-      <h2>Manage Inventory</h2>
+      <h2>Inventory</h2>
       
       <div className="add-item-form">
         <input
@@ -34,11 +34,11 @@ function InventoryManager() {
         />
         <input
           type="number"
-          placeholder="Amount"
+          placeholder="Quantity"
           value={newItemAmount || ''}
           onChange={(e) => setNewItemAmount(e.target.value)}
         />
-        <button onClick={addItem}>Add</button>
+        <button onClick={addItem}>Add Item</button>
       </div>
 
       <div style={{ overflowX: 'auto' }}>
@@ -46,7 +46,7 @@ function InventoryManager() {
           <thead>
             <tr>
               <th>Item</th>
-              <th>Qty</th>
+              <th>Quantity</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -64,7 +64,7 @@ function InventoryManager() {
                   />
                 </td>
                 <td>
-                  <button onClick={() => removeItem(item.id)}>Remove</button>
+                  <button onClick={() => removeItem(item.id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -75,13 +75,13 @@ function InventoryManager() {
       <div className="save-load">
         <button onClick={() => {
           localStorage.setItem('inventory', JSON.stringify(items));
-          alert('Saved!');
-        }}>Save</button>
+          alert('Inventory saved successfully');
+        }}>Save Inventory</button>
         <button onClick={() => {
           const savedItems = JSON.parse(localStorage.getItem('inventory')) || [];
           setItems(savedItems);
-          alert('Loaded!');
-        }}>Load</button>
+          alert('Inventory loaded successfully');
+        }}>Load Inventory</button>
       </div>
     </div>
   );
