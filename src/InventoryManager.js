@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Move inventoryItems outside the component
 const INVENTORY_ITEMS = {
