@@ -103,7 +103,7 @@ function InventoryManager() {
             localStorage.setItem('officeInventory', JSON.stringify(inventory));
             alert('Inventory saved successfully');
           }}>
-            Save Inventory
+            Save
           </button>
         </div>
       </div>
