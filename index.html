@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bar Inventory</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>Bar Inventory</h1>
+      <button class="menu-button" id="menuButton">
+        <div class="menu-button-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-card" id="menuCard">
+        <button class="active" data-category="drinks">Drinks</button>
+        <button data-category="tea">Tea</button>
+        <button data-category="sirup">Monin Sirup</button>
+      </div>
+    </div>
+
+    <div class="inventory-manager">
+      <div class="inventory-content">
+        <div class="table-container">
+          <table class="inventory-list">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+              <!-- Items will be populated here -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="comment-box">
+          <textarea id="commentBox" placeholder="Add your notes here..." rows="4"></textarea>
+        </div>
+
+        <div class="save-load">
+          <button class="danger-button" id="resetButton">Reset <span id="categoryName">drinks</span></button>
+          <button id="saveButton">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
