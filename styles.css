@@ -11,11 +11,22 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+/* .app {
+  padding: 0;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 430px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+} */
+
 .app {
   padding: 0;
   margin: 0;
+  margin: 0 auto;
   min-height: 100vh;
-}
+  max-width: 430px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
 
 .header {
   display: flex;
