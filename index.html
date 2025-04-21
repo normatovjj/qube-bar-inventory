@@ -10,13 +10,22 @@
   <div class="app">
     <div class="header">
       <h1>Bar Inventory</h1>
-      <button class="menu-button" id="menuButton">
-        <div class="menu-button-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
+      <div class="header-buttons">
+        <button class="reset-button danger-button" id="resetButton" title="Reset">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          <span class="visually-hidden">Reset <span id="categoryName">drinks</span></span>
+        </button>
+        <button class="menu-button" id="menuButton">
+          <div class="menu-button-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
     </div>
 
     <div class="menu-overlay" id="menuOverlay">
@@ -48,7 +57,6 @@
         </div>
 
         <div class="save-load">
-          <button class="danger-button" id="resetButton">Reset <span id="categoryName">drinks</span></button>
           <button id="saveButton">Save</button>
         </div>
       </div>

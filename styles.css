@@ -45,6 +45,42 @@ body {
   padding-left: 8px;
 }
 
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reset-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #ff3b30;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.reset-button:active {
+  opacity: 0.9;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .menu-button {
   width: 44px;
   height: 44px;
@@ -244,7 +280,7 @@ body {
   cursor: pointer;
 }
 
-.save-load .danger-button {
+.danger-button {
   background: #ff3b30;
 }
 
