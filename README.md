@@ -1,50 +1,46 @@
-# Vanilla JS Bar Inventory
+# Bar Inventory Management Tool
 
-A lightweight bar inventory tracking application built with vanilla JavaScript, HTML, and CSS. This version maintains all the functionality of the original React app but with a much smaller footprint.
+A lightweight, mobile-first web application designed to dramatically speed up the end-of-shift inventory process for bar and restaurant staff. Saves ~30 hours of labour per month (20-30 minutes per shift). 
 
-## Features
+---
 
-- Track inventory for different categories (drinks, tea, syrups)
-- Mobile-friendly UI
-- Automatic data saving using localStorage
-- Notes/comments section for each category
-- Reset functionality
+## 💡 The Problem
 
-## File Size Comparison
+In many bars and restaurants, the end-of-shift inventory process is a tedious, manual task. Staff must write down counts for dozens of items on a piece of paper, a process that is slow, prone to errors, and frustrating. I experienced this inefficiency firsthand and saw that it wasted **20-30 minutes of valuable time every single shift.**
 
-| Version | Size |
-|---------|------|
-| React Version | ~500MB (with node_modules) |
-| Vanilla JS Version | < 20KB |
+## ✅ The Solution
 
-## How to Use
+This application digitises and streamlines the entire workflow. It provides a simple, fast, and intuitive interface that allows staff to rapidly log inventory counts directly on their mobile phones. The core focus is on speed and ease of use in a fast-paced environment. The result is a significant reduction in time spent on administrative tasks and a major boost in team morale.
 
-1. Simply open `index.html` in any modern browser
-2. Navigate between categories using the menu button in the top-right
-3. Enter inventory amounts for each item
-4. Add notes in the text area
-5. Use the Save button to explicitly save your data (though it auto-saves on changes)
-6. Use the Reset button to clear all entries for the current category
+## ✨ Key Features
 
-## Deployment
+*   **Intuitive Category Navigation:** Quickly switch between product categories (Drinks, Syrups, Tea, etc.) with a single tap.
+*   **Mobile-First Design:** Built for on-the-go use on any mobile device.
+*   **Automatic Data Saving:** All entries are automatically saved to the browser's local storage, preventing any loss of work.
+*   **Simple Reset Functionality:** Clear a category's entries with a single confirmation click to start fresh for the next shift.
+*   **Embedded Notes:** Add comments or notes for the next shift (e.g., "Order more tonic water").
 
-You can deploy this app by uploading these three files to any web hosting service:
+## 🛠️ Tech Stack & Architectural Decisions
 
-- `index.html`
-- `styles.css`
-- `script.js`
+This project was intentionally built with **Vanilla JavaScript, HTML, and CSS** to ensure:
+*   **🚀 Blazing Fast Performance:** The app loads instantly, even on weak network connections.
+*   **🗑️ Minimal Footprint:** The entire application is less than 20KB, compared to a ~500MB React equivalent (including `node_modules`).
+*   **🚫 Zero Dependencies:** This increases stability and removes the need for maintenance or framework updates.
 
-Recommended free hosting options:
-- GitHub Pages
-- Netlify
-- Vercel
+| Technology | Description |
+|------------|-------------|
+| HTML5      | Semantic structure for content. |
+| CSS3       | Custom styling and responsive design. |
+| JavaScript (ES6+) | Core application logic and DOM manipulation. |
+| localStorage | Browser-based storage for data persistence. |
 
-## Why Vanilla JS?
+## 🚀 How to Use
 
-For simple applications like this, vanilla JavaScript provides:
-- Tiny file size
-- Fast loading and execution
-- No dependencies
-- Long-term stability (no framework upgrades needed)
+No installation is needed.
+1.  Open `index.html` in any modern web browser.
+2.  Use the application to track your inventory. All data is saved automatically in your browser.
 
-This makes it ideal for straightforward inventory tracking applications where complex state management isn't required.
+## 📈 Future Roadmap (Potential Improvements)
+
+*   Basic data visualization to track consumption trends over time.
+*   Cloud synchronization for multi-user/multi-device access.
